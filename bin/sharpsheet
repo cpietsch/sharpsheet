@@ -1,0 +1,48 @@
+#!/usr/bin/env node
+
+// https://github.com/cpietsch/sharpsheet
+// by Christopher Pietsch 2020
+
+const fs = require("fs");
+const path = require("path");
+const glob = require("glob");
+const sharpsheet = require("../");
+// const sharpsheet = require("../src/sharpsheet.js");
+
+var argv = require("yargs")
+  .usage("Usage: sharpsheet /path/to/images [options]")
+  .command("/path/to/images", "Path to input images")
+  .example(
+    "sharpsheet /path/to/images",
+    "create spritesheets from source images"
+  )
+  .demandCommand(1)
+  // .demandOption(['images'])
+  .describe("format", 'Input image format (can be multiple eg. "jpg|png")')
+  .describe("spritesheetDimension", "Dimension for generated spritesheets")
+  .describe("outputPath", "Path to output folder")
+  .describe("outputFormat", "Output image format")
+  .describe("outputQuality", "Output image quality (0-100)")
+  .default("format", "png")
+  .default("outputFormat", "png")
+  .default("outputQuality", 80)
+  .default("outputPath", "./sprites")
+  .default("spritesheetDimension", 2048)
+  .help("h")
+  .alias("h", "help").argv;
+
+(async function main() {
+  const options = {
+    inputFormat: argv.inputFormat,
+    outputFormat: argv.outputFormat,
+    sheetDimension: argv.spritesheetDimension,
+    outputQuality: argv.outputQuality,
+  };
+
+  const inputPath = argv._[0];
+  console.log("\nlooking for images at ", inputPath + "/*." + argv.format);
+
+  const spriter = await sharpsheet(inputPath, argv.outputPath, options);
+
+  console.log("done");
+})();
