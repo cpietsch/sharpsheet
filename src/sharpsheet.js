@@ -153,7 +153,7 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
     })
   );
 
-  console.log(spritesheets);
+  // console.log(spritesheets);
 
   // generate json file
 
@@ -169,11 +169,6 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
   }));
 
   const jsonOut = {
-    scaleName: "full",
-    variation: "web",
-    loadingStage: "web",
-    id: "web_web_full",
-    resolution: 1,
     meta: {
       type: "sharpsheet",
       version: "1",
@@ -186,10 +181,6 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
     outputPath + "/" + outputFilename,
     JSON.stringify(jsonOut, null, 2)
   );
-
-  function formatCoordinates(coordinates) {
-    return spritesheets.map();
-  }
 }
 
 const chunk = (arr, size) =>
