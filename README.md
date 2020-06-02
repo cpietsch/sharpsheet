@@ -40,4 +40,4 @@ Examples:
   sharpsheet /path/to/images/*.png          run on png's
   sharpsheet                                run on png's and jpg's in all
   /path/to/images/**/*.(png|jpg)            subfolder
- ```
+ ````
