@@ -22,6 +22,7 @@ const spriter = await sharpsheet(input, outputPath, options);
 ```
 
 ## CLI
+install globally via ```npm install -g sharpsheet```
 ````
 Usage: sharpsheet /path/to/images/*.png [options]
 
