@@ -12,27 +12,32 @@ import ShelfPack from "@mapbox/shelf-pack";
 //   console.log('Queue contains ' + queueLength + ' task(s)');
 // });
 
-export default async function sharpsheet(inputPath, _outputPath, options) {
+export default async function sharpsheet(input, _outputPath, options) {
   const border = options.border || 1;
   const sheetDimension = options.sheetDimension || 1024;
   const outputFormat = options.outputFormat || "png";
   const outputQuality = options.outputQuality || 100;
   const outputFilename = options.outputFilename || "spritesheet.json";
-  const inputFormat = options.inputFormat || "png";
   const compositeChunkSize = options.compositeChunkSize || 100;
-  const sheetBackground = options.sheetBackground || {
-    r: 0,
-    g: 0,
-    b: 0,
-    alpha: 0,
-  };
-
-  const outputPath = createPath(path.resolve("./", _outputPath));
-  const files = glob.sync(inputPath + "/*." + inputFormat); //.slice(0,100)
+  const sheetBackground = options.sheetBackground || { r: 0, g: 0, b: 0, alpha: 0 };
 
   let sizes = [];
   let images = [];
   let names = [];
+  let files = [];
+
+  if(typeof input === "string"){
+    files = glob.sync(input);
+  }  else if(isArray(input)){
+    files = input
+  }
+
+  if(!files.length){
+    console.error("no images found")
+    return
+  }
+
+  const outputPath = createPath(_outputPath);
 
   console.log("found", files.length, "files");
   console.log("loading metadata");
@@ -44,12 +49,7 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
     const basename = path.parse(file).name;
 
     try {
-      // const image = sharp(file)
       const metadata = await sharp(file).metadata();
-
-      // const scaledDimension = scaleTo(metadata.width, metadata.height, 128)
-      // sizes.push({ id: +i, w: scaledDimension.width +2*border, h: scaledDimension.height +2*border })
-      // images.push(image)
 
       sizes.push({
         id: +i,
@@ -68,6 +68,7 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
   console.log("bin packing");
 
   //sizes.sort((a,b)=> Math.max(b.w,b.h) - Math.max(a.w,a.h))
+  sizes.sort((a,b)=> b.h - a.h)
 
   let queue = sizes.map((d) => d);
   let packs = [];
@@ -96,30 +97,6 @@ export default async function sharpsheet(inputPath, _outputPath, options) {
 
   const spritesheets = await Promise.all(
     packed.map(async (composite, index) => {
-      // const composite = []
-      // for(let bin of pack){
-      //   console.log(bin.id)
-      //   const scaledImage = await images[bin.id].resize(128, 128, { fit: 'inside' }).toBuffer()
-      //   const elem = {
-      //     input: scaledImage,
-      //     left: bin.x+border,
-      //     top: bin.y+border
-      //   }
-      //   composite.push(elem)
-      // }
-
-      // const composite = await Promise.all(pack.map(async bin => {
-      //   console.log(bin.id)
-      //   const scaledImage = await images[bin.id].resize(128, 128, { fit: 'inside' }).toBuffer()
-
-      //   return {
-      //     //input: images[bin.id],
-      //     input: scaledImage,
-      //     left: bin.x+border,
-      //     top: bin.y+border
-      //   }
-      // }))
-
       console.log("composing spritesheet", index);
 
       const options = {
@@ -199,6 +176,6 @@ const makeFilename = (dimension, index, format) =>
   `sprite-${dimension}-${index}.${format}`;
 
 function createPath(path) {
-  if (!fs.existsSync(path)) fs.mkdirSync(path, { recursive: true });
+  if (!fs.existsSync(path)) fs.mkdirSync(path, { recursive: true }); // @todo: polyfill
   return path;
 }

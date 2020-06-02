@@ -29,7 +29,8 @@
     "src/*.js"
   ],
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "watch": "rollup -c -w"
   },
   "engines": {
     "node": ">=10.13.0"
