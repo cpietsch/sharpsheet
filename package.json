@@ -1,6 +1,6 @@
 {
   "name": "sharpsheet",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "fast spritesheet generator using sharp",
   "author": {
     "name": "Christopher Pietsch",
