@@ -31,7 +31,7 @@ Commands:
 
 Options:
   --version               Show version number                          [boolean]
-  --spritesheetDimension  Dimension for generated spritesheets   [default: 2048]
+  --sheetDimension        Dimension for generated spritesheets   [default: 2048]
   --outputPath            Path to output folder           [default: "./sprites"]
   --outputFormat          Output image format                   [default: "png"]
   --outputQuality         Output image quality (0-100)             [default: 80]
