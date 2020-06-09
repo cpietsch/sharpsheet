@@ -22,11 +22,11 @@ var argv = require("yargs")
   )
   .demandCommand(1)
   // .demandOption(['images'])
-  .describe("spritesheetDimension", "Dimension for generated spritesheets")
+  .describe("sheetDimension", "Dimension for generated spritesheets")
   .describe("outputPath", "Path to output folder")
   .describe("outputFormat", "Output image format")
   .describe("outputQuality", "Output image quality (0-100)")
-  .default("spritesheetDimension", 2048)
+  .default("sheetDimension", 2048)
   .default("outputFormat", "png")
   .default("outputQuality", 80)
   .default("outputPath", "./sprites")
@@ -36,7 +36,7 @@ var argv = require("yargs")
 (async function main() {
   const options = {
     outputFormat: argv.outputFormat,
-    sheetDimension: argv.spritesheetDimension,
+    sheetDimension: argv.sheetDimension,
     outputQuality: argv.outputQuality,
   };
 
