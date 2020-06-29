@@ -10,14 +10,14 @@ const sharpsheet = require("../");
 // const sharpsheet = require("../src/sharpsheet.js");
 
 var argv = require("yargs")
-  .usage("Usage: sharpsheet /path/to/images/*.png [options]")
-  .command("/path/to/images/*.png", "Glob to input images")
+  .usage("Usage: sharpsheet \"/path/to/images/*.png\" [options]")
+  .command("\"/path/to/images/*.png\"", "Glob to input images")
   .example(
-    "sharpsheet /path/to/images/*.png",
+    "sharpsheet \"/path/to/images/*.png\"",
     "run on png's"
   )
   .example(
-    "sharpsheet /path/to/images/**/*.(png|jpg)",
+    "sharpsheet \"/path/to/images/**/*.(png|jpg)\"",
     "run on png's and jpg's in all subfolder"
   )
   .demandCommand(1)
