@@ -24,10 +24,10 @@ const spriter = await sharpsheet(input, outputPath, options);
 ## CLI
 install globally via ```npm install -g sharpsheet```
 ````
-Usage: sharpsheet /path/to/images/*.png [options]
+Usage: sharpsheet "/path/to/images/*.png" [options]
 
 Commands:
-  sharpsheet /path/to/images/*.png  Glob to input images
+  sharpsheet "/path/to/images/*.png"  Glob to input images
 
 Options:
   --version               Show version number                          [boolean]
@@ -38,7 +38,7 @@ Options:
   -h, --help              Show help                                    [boolean]
 
 Examples:
-  sharpsheet /path/to/images/*.png          run on png's
+  sharpsheet "/path/to/images/*.png"          run on png's
   sharpsheet                                run on png's and jpg's in all
-  /path/to/images/**/*.(png|jpg)            subfolder
+  "/path/to/images/**/*.(png|jpg)"            subfolder
  ````
