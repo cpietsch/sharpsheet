@@ -33,12 +33,12 @@
     "watch": "rollup -c -w"
   },
   "engines": {
-    "node": ">=10.13.0"
+    "node": ">=17.0.0"
   },
   "dependencies": {
     "@mapbox/shelf-pack": "^3.2.0",
-    "glob": "^7.1.6",
-    "sharp": "^0.25.2",
+    "glob": "^7.2.0",
+    "sharp": "^0.29.3",
     "yargs": "^15.1.0"
   },
   "devDependencies": {
