@@ -28,7 +28,7 @@ export default async function sharpsheet(input, _outputPath, options) {
 
   if(typeof input === "string"){
     files = glob.sync(input);
-  }  else if(isArray(input)){
+  }  else if(Array.isArray(input)){
     files = input
   }
 
