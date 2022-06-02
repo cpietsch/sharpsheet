@@ -26,13 +26,18 @@ export default async function sharpsheet(input, _outputPath, options) {
   let names = [];
   let files = [];
 
-  if(typeof input === "string"){
-    files = glob.sync(input);
-  }  else if(Array.isArray(input)){
+  if (typeof input === "string") {
+    // check if input is an array and parse it
+    if (input.startsWith("[") && input.endsWith("]")) {
+      files = JSON.parse(input.replace(/'/g, '"'));
+    } else {
+      files = glob.sync(input);
+    }
+  } else if (Array.isArray(input)) {
     files = input
   }
 
-  if(!files.length){
+  if (!files.length) {
     console.error("no images found")
     return
   }
@@ -68,7 +73,7 @@ export default async function sharpsheet(input, _outputPath, options) {
   console.log("bin packing");
 
   //sizes.sort((a,b)=> Math.max(b.w,b.h) - Math.max(a.w,a.h))
-  sizes.sort((a,b)=> b.h - a.h)
+  sizes.sort((a, b) => b.h - a.h)
 
   let queue = sizes.map((d) => d);
   let packs = [];
