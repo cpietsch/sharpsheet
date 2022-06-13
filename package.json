@@ -1,6 +1,6 @@
 {
   "name": "sharpsheet",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "fast spritesheet generator using sharp",
   "author": {
     "name": "Christopher Pietsch",
@@ -33,13 +33,13 @@
     "watch": "rollup -c -w"
   },
   "engines": {
-    "node": ">=17.0.0"
+    "node": ">=v16.15.1"
   },
   "dependencies": {
     "@mapbox/shelf-pack": "^3.2.0",
-    "glob": "^7.2.0",
-    "sharp": "^0.29.3",
-    "yargs": "^15.1.0"
+    "glob": "^8.0.3",
+    "sharp": "^0.30.6",
+    "yargs": "^17.5.1"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^11.1.0",
