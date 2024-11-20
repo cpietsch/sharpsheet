@@ -4,7 +4,7 @@
 import fs from "fs";
 import sharp from "sharp";
 import path from "path";
-import glob from "glob";
+import { glob } from 'glob';
 import ShelfPack from "@mapbox/shelf-pack";
 
 // sharp.cache(false)

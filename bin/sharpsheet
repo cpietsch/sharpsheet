@@ -3,13 +3,12 @@
 // https://github.com/cpietsch/sharpsheet
 // by Christopher Pietsch 2020
 
-const fs = require("fs");
-const path = require("path");
-const glob = require("glob");
-const sharpsheet = require("../");
-// const sharpsheet = require("../src/sharpsheet.js");
+import sharpsheet from '../src/sharpsheet.js'; // Adjust the path as needed
 
-var argv = require("yargs")
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+
+const argv = yargs(hideBin(process.argv))
   .usage("Usage: sharpsheet \"/path/to/images/*.png\" [options]")
   .command("\"/path/to/images/*.png\"", "Glob to input images")
   .example(
@@ -21,17 +20,12 @@ var argv = require("yargs")
     "run on png's and jpg's in all subfolder"
   )
   .demandCommand(1)
-  // .demandOption(['images'])
   .describe("sheetDimension", "Dimension for generated spritesheets")
   .describe("outputPath", "Path to output folder")
   .describe("outputFormat", "Output image format")
   .describe("outputQuality", "Output image quality (0-100)")
-  .default("sheetDimension", 2048)
-  .default("outputFormat", "png")
-  .default("outputQuality", 80)
   .default("outputPath", "./sprites")
-  .help("h")
-  .alias("h", "help").argv;
+  .argv;
 
 (async function main() {
   const options = {
