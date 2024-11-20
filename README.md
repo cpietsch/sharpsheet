@@ -4,7 +4,11 @@ fast node spritesheet generator using sharp and bin packing
 ## API
 
 ```js
-const sharpsheet = require("sharpsheet")
+// ES6 module syntax:
+import sharpsheet from "sharpsheet/src/sharpsheet.js";
+// old require syntax:
+// const sharpsheet = require("sharpsheet")
+
 // input can be a glob string
 const input = "/path/to/images/*.png"
 // input can be an array of image paths
