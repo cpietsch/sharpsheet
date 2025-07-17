@@ -13,7 +13,7 @@ import ShelfPack from "@mapbox/shelf-pack";
 // });
 
 export default async function sharpsheet(input, _outputPath, options) {
-  const border = options.border || 1;
+  const border = options.border ?? 1;
   const sheetDimension = options.sheetDimension || 1024;
   const outputFormat = options.outputFormat || "png";
   const outputQuality = options.outputQuality || 100;
