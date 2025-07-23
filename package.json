@@ -1,6 +1,6 @@
 {
   "name": "sharpsheet",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "fast spritesheet generator using sharp",
   "author": {
     "name": "Christopher Pietsch",
@@ -22,13 +22,14 @@
     "sharpsheet": "bin/sharpsheet.js"
   },
   "main": "dist/sharpsheet.js",
-  "module": "src/sharpsheet.js",
-  "type": "module",
+  "module": "dist/sharpsheet.mjs",
   "files": [
     "bin/*",
     "dist/*.js",
+    "dist/*.mjs",
     "src/*.js"
   ],
+  "type": "module",
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -c -w"

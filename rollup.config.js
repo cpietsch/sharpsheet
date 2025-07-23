@@ -1,37 +1,43 @@
 import terser from "@rollup/plugin-terser";
-import meta from './package.json' assert { type: 'json' };
+import { readFileSync } from 'fs';
+const meta = JSON.parse(readFileSync('./package.json', 'utf8'));
 
 const config = {
   input: "src/sharpsheet.js",
   external: ["fs", "path", ...Object.keys(meta.dependencies || {})],
-  output: {
-    file: `dist/${meta.name}.js`,
-    name: "sharpsheet",
-    format: "cjs",
-    indent: false,
-    extend: true,
-    banner: `// ${meta.homepage} v${
-      meta.version
-    } Copyright ${new Date().getFullYear()} ${meta.author.name}`,
-  },
   plugins: [],
 };
 
+const banner = `// ${meta.homepage} v${
+  meta.version
+} Copyright ${new Date().getFullYear()} ${meta.author.name}`;
+
 export default [
-  config,
+  // CommonJS build
   {
     ...config,
     output: {
-      ...config.output,
-      //file: `dist/${meta.name}.min.js`,
+      file: 'dist/sharpsheet.js',
+      format: 'cjs',
+      exports: 'auto',
+      banner
+    }
+  },
+  // ESM build
+  {
+    ...config,
+    output: {
+      file: 'dist/sharpsheet.mjs',
+      format: 'esm',
+      banner
     },
     plugins: [
       ...config.plugins,
       terser({
         output: {
-          preamble: config.output.banner,
+          preamble: banner,
         },
       }),
-    ],
-  },
+    ]
+  }
 ];
