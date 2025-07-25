@@ -46,5 +46,8 @@
   "devDependencies": {
     "rollup": "^4.27.3",
     "@rollup/plugin-terser": "^0.4.4"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
