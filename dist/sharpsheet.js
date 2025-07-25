@@ -59,11 +59,20 @@ async function sharpsheet(input, _outputPath, options) {
 
     try {
       const metadata = await sharp(file).metadata();
+      
+      const imageWidth = metadata.width + 2 * border;
+      const imageHeight = metadata.height + 2 * border;
+      
+      // Check if image (including border) fits within spritesheet dimensions
+      if (imageWidth > sheetDimension || imageHeight > sheetDimension) {
+        console.warn(`Skipping ${file}: Image size ${metadata.width}x${metadata.height} (with border: ${imageWidth}x${imageHeight}) exceeds spritesheet dimension ${sheetDimension}x${sheetDimension}`);
+        continue;
+      }
 
       sizes.push({
         id: +i,
-        w: metadata.width + 2 * border,
-        h: metadata.height + 2 * border,
+        w: imageWidth,
+        h: imageHeight,
       });
       images.push(file);
       names.push(basename);
@@ -71,6 +80,12 @@ async function sharpsheet(input, _outputPath, options) {
       console.error(e, file);
       console.log("skipping file");
     }
+  }
+
+  // Check if any images remain after filtering
+  if (sizes.length === 0) {
+    console.error("No valid images found that fit within the spritesheet dimensions");
+    return;
   }
 
   // Bin Pack for those images
