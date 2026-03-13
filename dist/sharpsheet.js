@@ -1,4 +1,4 @@
-// https://github.com/cpietsch/sharpsheet v0.1.5 Copyright 2025 Christopher Pietsch
+// https://github.com/cpietsch/sharpsheet v0.1.6 Copyright 2026 Christopher Pietsch
 'use strict';
 
 var fs = require('fs');
